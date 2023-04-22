@@ -1,7 +1,11 @@
 package com.mindex.challenge.controller;
 
+import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
+import com.mindex.challenge.data.ReportingStructure;
+import com.mindex.challenge.service.CompensationService;
 import com.mindex.challenge.service.EmployeeService;
+import com.mindex.challenge.service.ReportingStructureService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,12 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private ReportingStructureService reportingStructureService;
+
+    @Autowired
+    private CompensationService compensationService;
 
     @PostMapping("/employee")
     public Employee create(@RequestBody Employee employee) {
@@ -34,5 +44,21 @@ public class EmployeeController {
 
         employee.setEmployeeId(id);
         return employeeService.update(employee);
+    }
+
+    @GetMapping("/employee/{id}/reporting-structure")
+    public ReportingStructure reportingStructure(@PathVariable String id) {
+        Employee employee = employeeService.read(id);
+        return reportingStructureService.generate(employee);
+    }
+
+    @PostMapping("/compensation/{employeeId}")
+    public Compensation create(@PathVariable String employeeId, @RequestBody Compensation compensation) {
+        return compensationService.create(employeeId, compensation);
+    }
+
+    @GetMapping("/compensation/{employeeId}")
+    public Compensation readCompensation(@PathVariable String employeeId) {
+        return compensationService.read(employeeId);
     }
 }
