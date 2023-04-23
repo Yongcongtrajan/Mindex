@@ -14,7 +14,7 @@ public class ReportingStructureServiceImp implements ReportingStructureService {
     @Override
     public ReportingStructure generate(Employee employee) {
         int numberOfReports = countReports(employee);
-        return new ReportingStructure(employee, numberOfReports);
+        return new ReportingStructure(numberOfReports);
     }
 
     public int countReports(Employee employee) {
