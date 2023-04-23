@@ -14,7 +14,9 @@ public class ReportingStructureServiceImp implements ReportingStructureService {
     @Override
     public ReportingStructure generate(Employee employee) {
         int numberOfReports = countReports(employee);
-        return new ReportingStructure(numberOfReports);
+        String firstName = employee.getFirstName();
+        String lastName = employee.getLastName();
+        return new ReportingStructure(firstName,lastName,numberOfReports);
     }
 
     public int countReports(Employee employee) {

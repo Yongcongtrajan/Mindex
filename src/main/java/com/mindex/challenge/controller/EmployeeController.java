@@ -9,6 +9,7 @@ import com.mindex.challenge.service.ReportingStructureService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -52,13 +53,15 @@ public class EmployeeController {
         return reportingStructureService.generate(employee);
     }
 
-    @PostMapping("/compensation/{employeeId}")
-    public Compensation create(@PathVariable String employeeId, @RequestBody Compensation compensation) {
-        return compensationService.create(employeeId, compensation);
+    @PostMapping("/compensation/{id}")
+    public ResponseEntity<Void> create(@PathVariable String id, @RequestBody Compensation compensation) {
+        compensationService.create(id, compensation);
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/compensation/{employeeId}")
-    public Compensation readCompensation(@PathVariable String employeeId) {
-        return compensationService.read(employeeId);
+
+    @GetMapping("/compensation/{id}")
+    public Compensation readCompensation(@PathVariable String id) {
+        return compensationService.read(id);
     }
 }

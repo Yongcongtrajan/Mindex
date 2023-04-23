@@ -34,7 +34,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-
 public class ReportingStructureServiceImpTest {
 
     private String employeeUrl;
@@ -121,6 +120,7 @@ public class ReportingStructureServiceImpTest {
         assertEquals(0,Objects.requireNonNull(reportingStructure3).getNumberOfReports());
         ReportingStructure reportingStructure4 = restTemplate.getForEntity(reportingStructureUrl,ReportingStructure.class,"c0c2293d-16bd-4603-8e08-638a9d18b22c").getBody();
         assertEquals(0,Objects.requireNonNull(reportingStructure4).getNumberOfReports());
+
 
 
 
