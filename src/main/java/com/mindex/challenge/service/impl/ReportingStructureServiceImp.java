@@ -13,12 +13,15 @@ public class ReportingStructureServiceImp implements ReportingStructureService {
     private EmployeeRepository employeeRepository;
     @Override
     public ReportingStructure generate(Employee employee) {
+        //once employee object is received, send it to countReports() to find number of reports
         int numberOfReports = countReports(employee);
+        //number of reports, first name and last name are send to ReportingStructure to assemble response payload
         String firstName = employee.getFirstName();
         String lastName = employee.getLastName();
         return new ReportingStructure(firstName,lastName,numberOfReports);
     }
 
+    //find number of reports by using Depth First Search
     public int countReports(Employee employee) {
         int totalReports = 0;
         if (employee.getDirectReports() == null || employee.getDirectReports().isEmpty()) {

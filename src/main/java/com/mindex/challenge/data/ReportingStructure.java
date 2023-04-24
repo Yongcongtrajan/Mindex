@@ -1,8 +1,6 @@
 package com.mindex.challenge.data;
 
 
-import java.util.SplittableRandom;
-
 public class ReportingStructure {
     private String firstName;
     private String LastName;

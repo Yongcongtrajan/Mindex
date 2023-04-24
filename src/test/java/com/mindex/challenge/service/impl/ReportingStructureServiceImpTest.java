@@ -2,35 +2,22 @@ package com.mindex.challenge.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mindex.challenge.dao.EmployeeRepository;
-import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.service.EmployeeService;
 import com.mindex.challenge.service.ReportingStructureService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -40,19 +27,6 @@ public class ReportingStructureServiceImpTest {
     private String employeeIdUrl;
     private String reportingStructureUrl;
 
-
-    @Autowired
-    private EmployeeService employeeService;
-
-    @Autowired
-    private ReportingStructureService reportingStructureService;
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @LocalServerPort
     private int port;
@@ -109,7 +83,7 @@ public class ReportingStructureServiceImpTest {
         assertEquals(Objects.requireNonNull(reportingStructure1).getNumberOfReports(),0);*/
 
 
-
+        //compare expected and acutal reports number
         ReportingStructure reportingStructure0 = restTemplate.getForEntity(reportingStructureUrl,ReportingStructure.class,"16a596ae-edd3-4847-99fe-c4518e82c86f").getBody();
         assertEquals(4,Objects.requireNonNull(reportingStructure0).getNumberOfReports());
         ReportingStructure reportingStructure1 = restTemplate.getForEntity(reportingStructureUrl,ReportingStructure.class,"b7839309-3348-463b-a7e3-5de1c168beb3").getBody();
